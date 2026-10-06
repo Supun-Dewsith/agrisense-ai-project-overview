@@ -1,4 +1,4 @@
-# AgriSense (AgroFarm) Management System — Architectural Overview & System Specification
+# AgriSense Management System — Architectural Overview & System Specification
 
 [![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg?logo=openjdk)](https://adoptium.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x%20%2F%204.x-brightgreen.svg?logo=springboot)](https://spring.io/projects/spring-boot)
@@ -11,14 +11,20 @@
 [![Python AI](https://img.shields.io/badge/FastAPI%20%2B%20Gemini-Plant%20Pathology-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4.svg?logo=tailwindcss)](https://tailwindcss.com/)
 [![Docker](https://img.shields.io/badge/Docker-Orchestration-2496ED.svg?logo=docker)](https://www.docker.com/)
+[![Backend Repo](https://img.shields.io/badge/GitHub-Backend%20Repository-181717.svg?logo=github)](https://github.com/Supun-Dewsith/agrofarm-backend)
+[![Frontend Repo](https://img.shields.io/badge/GitHub-Frontend%20Repository-181717.svg?logo=github)](https://github.com/Supun-Dewsith/agrofarm-web)
 
 ---
 
 ## Executive Summary
 
-The **AgriSense (AgroFarm) Management System** is an enterprise-grade, cloud-native precision agriculture and farm operations management platform. The platform bridges the gap between field-level farming activities and operational leadership by unifying **geospatial GIS plot mapping**, **time-sensitive dynamic QR workforce attendance**, **AI-driven plant pathology diagnostics**, **crop lifecycle tracking**, and **commodity market intelligence** into a decoupled, highly scalable architecture.
+The **AgriSense Management System** is an enterprise-grade, cloud-native precision agriculture and farm operations management platform. The platform bridges the gap between field-level farming activities and operational leadership by unifying **geospatial GIS plot mapping**, **time-sensitive dynamic QR workforce attendance**, **AI-driven plant pathology diagnostics**, **crop lifecycle tracking**, and **commodity market intelligence** into a decoupled, highly scalable architecture.
 
 The platform is deployed across **Cloudflare Pages** (global edge delivery for the web client) and **Microsoft Azure** (scalable backend services and reverse proxy), backed by **TiDB (Distributed NewSQL)** for elastic horizontal scalability and strong ACID guarantees, and fine-tuned with **JVM runtime optimizations** for minimal footprint and low response latency.
+
+> 📦 **Source Code Repositories:**
+> - ⚙️ **Backend API & AI Services:** [https://github.com/Supun-Dewsith/agrofarm-backend.git](https://github.com/Supun-Dewsith/agrofarm-backend.git)
+> - 💻 **Frontend Web Portal (SPA):** [https://github.com/Supun-Dewsith/agrofarm-web.git](https://github.com/Supun-Dewsith/agrofarm-web.git)
 
 ---
 
@@ -199,6 +205,7 @@ Schema state is deterministically managed through **Flyway**, executing forward 
 ## 5. Frontend Web Application Specification & Visual Walkthrough
 
 ### Tech Stack
+* **Repository:** [https://github.com/Supun-Dewsith/agrofarm-web.git](https://github.com/Supun-Dewsith/agrofarm-web.git)
 * **Framework:** React 19.2, React Router v7 (SPA Architecture)
 * **Language:** TypeScript 5.9
 * **Build Engine:** Vite 8.0 with `@cloudflare/vite-plugin`
@@ -392,6 +399,7 @@ User Action  ──►  fetchWithAuth(url)
 ## 6. Backend API & AI Microservice Specification
 
 ### Core Tech Stack
+* **Repository:** [https://github.com/Supun-Dewsith/agrofarm-backend.git](https://github.com/Supun-Dewsith/agrofarm-backend.git)
 * **Language & Runtime:** Java 21 LTS (Eclipse Temurin)
 * **Framework:** Spring Boot 3.x / 4.x
 * **Security:** Spring Security 6, JJWT 0.12.6, BCrypt
@@ -480,7 +488,7 @@ The system enforces strict multi-tier permissions verified on both the frontend 
 
 ```env
 # Database Connection (TiDB Distributed Cloud / MySQL Protocol)
-DB_URL=jdbc:mysql://<tidb-host>:4000/agrofarm?sslMode=VERIFY_IDENTITY&useUnicode=true&characterEncoding=utf8
+DB_URL=jdbc:mysql://<tidb-host>:4000/agrisense?sslMode=VERIFY_IDENTITY&useUnicode=true&characterEncoding=utf8
 DB_USERNAME=your_tidb_username
 DB_PASSWORD=your_tidb_password
 
@@ -488,9 +496,9 @@ DB_PASSWORD=your_tidb_password
 JWT_SECRET=your_super_secret_base64_encoded_256_bit_jwt_key
 JWT_EXPIRATION=86400000
 ADMIN_USERNAME=admin
-ADMIN_EMAIL=admin@agrofarm.com
+ADMIN_EMAIL=admin@agrisense.com
 ADMIN_PASSWORD=YourSecureAdminPassword123!
-CORS_ALLOWED_ORIGINS=https://agrofarm.pages.dev,http://localhost:5173
+CORS_ALLOWED_ORIGINS=https://agrisense.pages.dev,http://localhost:5173
 
 # Python AI Microservice Integration
 PYTHON_MICROSERVICE_URL=http://python-microservice:8000
@@ -519,7 +527,16 @@ VITE_API_BASE_URL=https://api.yourdomain.com
 
 ### Local Development Setup
 
-#### 1. Start the Backend Infrastructure
+#### 1. Clone the Repositories
+```bash
+# Clone the backend API and AI services
+git clone https://github.com/Supun-Dewsith/agrofarm-backend.git
+
+# Clone the web client portal
+git clone https://github.com/Supun-Dewsith/agrofarm-web.git
+```
+
+#### 2. Start the Backend Infrastructure
 ```bash
 # Navigate to the backend directory
 cd agrofarm-backend/agrofarm-backend
@@ -532,7 +549,7 @@ cd agrofarm-backend/agrofarm-backend
 docker compose up -d
 ```
 
-#### 2. Start the Frontend Web Application
+#### 3. Start the Frontend Web Application
 ```bash
 # Navigate to the frontend directory
 cd agrofarm-web/agrofarm-web
@@ -572,4 +589,4 @@ curl http://localhost/ai/health
 
 ---
 
-*AgriSense (AgroFarm) Management System — Engineered for scalability, reliability, and precision agriculture.*
+*AgriSense Management System — Engineered for scalability, reliability, and precision agriculture.*
