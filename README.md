@@ -11,6 +11,8 @@
 [![Python AI](https://img.shields.io/badge/FastAPI%20%2B%20Gemini-Plant%20Pathology-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4.svg?logo=tailwindcss)](https://tailwindcss.com/)
 [![Docker](https://img.shields.io/badge/Docker-Orchestration-2496ED.svg?logo=docker)](https://www.docker.com/)
+[![Production Status](https://img.shields.io/badge/Status-Live%20%26%20Delivered-success.svg)](#9-production-deployment--client-handover-status)
+[![Project Type](https://img.shields.io/badge/Project-Client%20Delivered-blue.svg)](#9-production-deployment--client-handover-status)
 [![Backend Repo](https://img.shields.io/badge/GitHub-Backend%20Repository-181717.svg?logo=github)](https://github.com/Supun-Dewsith/agrofarm-backend)
 [![Frontend Repo](https://img.shields.io/badge/GitHub-Frontend%20Repository-181717.svg?logo=github)](https://github.com/Supun-Dewsith/agrofarm-web)
 
@@ -61,8 +63,7 @@ The platform is deployed across **Cloudflare Pages** (global edge delivery for t
 6. [Backend API & AI Microservice Specification](#6-backend-api--ai-microservice-specification)
 7. [Core REST API Directory](#7-core-rest-api-directory)
 8. [Security & Role-Based Access Control (RBAC)](#8-security--role-based-access-control-rbac)
-9. [Configuration & Environment Variables](#9-configuration--environment-variables)
-10. [Local Development & Deployment Guide](#10-local-development--deployment-guide)
+9. [Production Deployment & Client Handover Status](#9-production-deployment--client-handover-status)
 
 ---
 
@@ -482,110 +483,21 @@ The system enforces strict multi-tier permissions verified on both the frontend 
 
 ---
 
-## 9. Configuration & Environment Variables
+## 9. Production Deployment & Client Handover Status
 
-### Backend Configuration (`agrofarm-backend/.env`)
+AgriSense was built and delivered as a **client requirement-based enterprise group project**, developed to digitize and optimize agricultural workflows, and successfully transitioned into active commercial operations.
 
-```env
-# Database Connection (TiDB Distributed Cloud / MySQL Protocol)
-DB_URL=jdbc:mysql://<tidb-host>:4000/agrisense?sslMode=VERIFY_IDENTITY&useUnicode=true&characterEncoding=utf8
-DB_USERNAME=your_tidb_username
-DB_PASSWORD=your_tidb_password
+### Delivery & Deployment Highlights
 
-# Authentication & Security
-JWT_SECRET=your_super_secret_base64_encoded_256_bit_jwt_key
-JWT_EXPIRATION=86400000
-ADMIN_USERNAME=admin
-ADMIN_EMAIL=admin@agrisense.com
-ADMIN_PASSWORD=YourSecureAdminPassword123!
-CORS_ALLOWED_ORIGINS=https://agrisense.pages.dev,http://localhost:5173
-
-# Python AI Microservice Integration
-PYTHON_MICROSERVICE_URL=http://python-microservice:8000
-PYTHON_MICROSERVICE_TIMEOUT_SECONDS=10
-GEMINI_API_KEY=your_google_gemini_api_key
-
-# Supabase Storage Integration
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_KEY=your_service_role_secret_key
-SUPABASE_BUCKET_NAME=avatars
-
-# JVM Tuning for Azure Container Limits
-JAVA_TOOL_OPTIONS=-Xms128m -Xmx320m -XX:+UseSerialGC -XX:TieredStopAtLevel=1
-```
-
-### Frontend Configuration (`agrofarm-web/.env`)
-
-```env
-# Cloudflare Pages / Local Base API
-VITE_API_BASE_URL=https://api.yourdomain.com
-```
-
----
-
-## 10. Local Development & Deployment Guide
-
-### Local Development Setup
-
-#### 1. Clone the Repositories
-```bash
-# Clone the backend API and AI services
-git clone https://github.com/Supun-Dewsith/agrofarm-backend.git
-
-# Clone the web client portal
-git clone https://github.com/Supun-Dewsith/agrofarm-web.git
-```
-
-#### 2. Start the Backend Infrastructure
-```bash
-# Navigate to the backend directory
-cd agrofarm-backend/agrofarm-backend
-
-# Package the Spring Boot JAR
-.\mvnw.cmd clean package -DskipTests   # Windows
-./mvnw clean package -DskipTests       # Linux/macOS
-
-# Start all backend containers (Spring Boot + Python AI + Nginx)
-docker compose up -d
-```
-
-#### 3. Start the Frontend Web Application
-```bash
-# Navigate to the frontend directory
-cd agrofarm-web/agrofarm-web
-
-# Install dependencies
-npm install
-
-# Start Vite development server
-npm run dev
-```
-The web dashboard is now available at `http://localhost:5173`.
-
----
-
-### Production Deployment Strategy
-
-#### 1. Frontend to Cloudflare Pages
-```bash
-cd agrofarm-web/agrofarm-web
-npm run build
-npx wrangler pages deploy ./build/client --project-name=agrofarm-web
-```
-
-#### 2. Backend to Microsoft Azure
-1. Provision an Azure Linux VM (e.g. Standard B1ms or B2s).
-2. Install Docker & Docker Compose.
-3. Clone repository and populate production `.env` pointing to **TiDB Cloud**.
-4. Launch the production compose stack:
-```bash
-docker compose -f docker-compose.prod.yml up -d --build
-```
-5. Verify health:
-```bash
-curl http://localhost/actuator/health
-curl http://localhost/ai/health
-```
+* **🟢 Operational Status:** The system is **live in production** and actively accessed by the client to manage multi-farm operations, supervise field labor, and execute AI plant diagnostics.
+* **☁️ Cloud Infrastructure:**
+  * **Frontend Web Dashboard:** Deployed and served at the edge via **Cloudflare Pages** for global distribution and sub-second UI interactions.
+  * **Backend API & Microservices:** Hosted in production on **Microsoft Azure** inside an isolated Docker container stack with an Nginx reverse proxy.
+  * **Distributed Database:** Backed by a **TiDB Cloud (Distributed NewSQL)** cluster for elastic scaling, high throughput, and multi-zone ACID transactional consistency.
+* **👥 Client Access & Role Provisioning:** Full administrative credentials (`ROLE_ADMIN`) and initial farm accounts were handed over to the client for day-to-day operations.
+* **🛠️ Developer Setup & Repositories:** For developers requiring local environment setup guides, `.env.example` templates, Flyway migration files, or automated build scripts, please refer directly to the respective source repositories:
+  * ⚙️ **Backend Core & AI Microservice:** [AgriSense Backend Repository](https://github.com/Supun-Dewsith/agrofarm-backend.git)
+  * 💻 **Frontend Web Application (SPA):** [AgriSense Web Repository](https://github.com/Supun-Dewsith/agrofarm-web.git)
 
 ---
 
