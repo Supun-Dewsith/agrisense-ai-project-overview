@@ -1,4 +1,4 @@
-# AgriSense Management System — Architectural Overview & System Specification
+# AgriSense AI integrated Management System — Architectural Overview & System Specification
 
 [![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg?logo=openjdk)](https://adoptium.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x%20%2F%204.x-brightgreen.svg?logo=springboot)](https://spring.io/projects/spring-boot)
